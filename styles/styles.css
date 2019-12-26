@@ -1,0 +1,30 @@
+*{
+    font-size: 14px;
+}
+
+a[href^=\#] {
+    text-decoration: none;
+}
+
+.blog-masthead {
+    background-color: #b34848;
+}
+
+.h1, h2, h3 {
+    color: #b34848;
+}
+
+#post-titles:hover {
+    text-decoration: underline;
+}
+
+
+
+
+/* 
+    Naslovi postova na home stranici treba da budu linkovi
+    Smanjiti veličinu fonta na celom projektu na 14px (html element)
+    Promeniti boju pozadine navbar-a: #b34848
+    Zameniti boju svih naslova (ne samo naslova postova) bojom #b34848
+    Naslovi postova na hover treba da ostanu iste boje, samo će dobiti underline. 
+*/
