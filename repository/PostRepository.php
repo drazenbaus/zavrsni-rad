@@ -62,5 +62,7 @@ class PostRepository {
       $stmt = $this->connection->prepare("DELETE FROM posts WHERE id = :id");
       $stmt->bindParam(':id', $postId);
       $stmt->execute();
+
+    //   da bi sve radilo kako treba potrebno je da se napravi on delete cascade u bazi na tabeli comments na foreign key post_id. 
     }
 }
