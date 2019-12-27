@@ -23,8 +23,6 @@ class DbConnection {
             die();
         }
 
-        
         return $connection;
     }
-
 }
