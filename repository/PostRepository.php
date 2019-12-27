@@ -7,7 +7,15 @@ class PostRepository {
     }
 
     public function getPosts() {
-        $stmt = $this->connection->prepare("SELECT * FROM posts");
+        $stmt = $this->connection->prepare("SELECT * FROM posts ORDER BY created_at DESC");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
+        return $result;
+    }
+
+    public function getLatestPosts() {
+        $stmt = $this->connection->prepare("SELECT * FROM posts ORDER BY created_at DESC LIMIT 5");
         $stmt->execute();
         $result = $stmt->fetchAll();
 
@@ -28,5 +36,31 @@ class PostRepository {
         $result = $stmt->fetchAll();
 
         return $result;
+    }
+
+    public function createPost(string $title, string $body, string $author): void {
+
+        if(!$title || !$body || !$author) {
+            return;
+        }
+
+        $sql = "INSERT INTO posts (title, body, author, created_at) VALUES (?,?,?,?)";
+        $stmt= $this->connection->prepare($sql);
+        $stmt->execute([
+            $title,
+            $body,
+            $author,
+            date_create()->format('Y-m-d H:i:s')
+        ]);
+    }
+
+    public function deletePost(int $postId): void {
+      if (!$postId) {
+        return;
+      }
+
+      $stmt = $this->connection->prepare("DELETE FROM posts WHERE id = :id");
+      $stmt->bindParam(':id', $postId);
+      $stmt->execute();
     }
 }
